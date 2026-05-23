@@ -1,0 +1,10 @@
+# Hide competition data and old files
+Train.csv
+Test.csv
+Prior.csv
+SampleSubmission.csv
+submission.csv
+DigiCow_pipeline.ipynb
+*.pdf
+__pycache__/
+.ipynb_checkpoints/

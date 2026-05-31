@@ -1,14 +1,21 @@
-# DigiCow Farmer Adoption Prediction
+# DigiCow Farmer Adoption Prediction 🐂
+## About DigiCow
+
+<img width="612" height="408" alt="image" src="https://github.com/user-attachments/assets/5f1ab866-55f2-47d9-a424-7ace33c30b6b" />
+
+
+
+DigiCow Africa LTD is an award-winning Kenyan agritech company working with over 200,000 smallholder farmers through mobile-based training and digital extension services. Named Kenya's most innovative agritech by the World Bank in 2019, DigiCow delivers audio-based training content on animal health, crop management and record-keeping directly to farmers' phones, replacing the traditional model of infrequent extension officer visits.
+
+Despite reaching farmers at scale, adoption rates after training sessions remain low at approximately 1-2%. This project builds interpretable machine learning models to predict which farmers are most likely to adopt the practices  taught after training. This enables DigiCow to prioritise follow-up support and design more effective extension strategies.
 
 ## Overview
-This project predicts the probability that a smallholder farmer adopts an agricultural practice within 7, 90 and 120 days of attending a 
-training session. The analysis was developed as part of the DigiCow Farmer Adoption Prediction challenge on Zindi Africa.
+This project predicts the probability that a smallholder farmer adopts an agricultural practice within 7, 90 and 120 days of attending a training session. The analysis was developed as part of the DigiCow Farmer Adoption Prediction challenge on Zindi Africa.
 
 The focus throughout is on interpretable models whose predictions and feature importance scores can be explained to a non-technical audience.
 
 ## Problem
-Adoption rates after agricultural training are very low and uneven; approximately 1-2% within any prediction window. Identifying which farmers are most likely to adopt allows DigiCow to prioritise follow-up 
-support and design more effective training programmes.
+Adoption rates after agricultural training are very low and uneven; approximately 1-2% within any prediction window. Identifying which farmers are most likely to adopt allows DigiCow to prioritise follow-up support and design more effective training programmes.
 
 ## Data
 | File | Description |
@@ -21,15 +28,14 @@ support and design more effective training programmes.
 
 ### Feature Engineering
 Six features were constructed from the available data:
-- `belong_to_cooperative` — binary flag, direct from training record
-- `is_ussd_registered` — binary flag, recoded from registration method
-- `trainer_rate_smoothed` — Bayesian smoothed historical adoption rate per trainer
-- `county_rate_smoothed` — Bayesian smoothed historical adoption rate per county
-- `topic_rate_smoothed` — mean smoothed adoption rate across session topics
-- `n_topics` — number of unique topics covered per session
+- `belong_to_cooperative` - binary flag, direct from training record
+- `is_ussd_registered` - binary flag, recoded from registration method
+- `trainer_rate_smoothed` - Bayesian smoothed historical adoption rate per trainer
+- `county_rate_smoothed` - Bayesian smoothed historical adoption rate per county
+- `topic_rate_smoothed` - mean smoothed adoption rate across session topics
+- `n_topics` - number of unique topics covered per session
 
-Smoothed rates were computed exclusively from Prior.csv to prevent data leakage. Bayesian smoothing pulls estimates from small groups 
-toward the global mean, preventing unreliable rates from rare trainers or counties from dominating predictions.
+Smoothed rates were computed exclusively from Prior.csv to prevent data leakage. Bayesian smoothing pulls estimates from small groups toward the global mean, preventing unreliable rates from rare trainers or counties from dominating predictions.
 
 ### Models
 Three models were built and compared:

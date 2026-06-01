@@ -9,12 +9,11 @@ DigiCow Africa LTD is an award-winning Kenyan agritech company working with over
 
 Despite reaching farmers at scale, adoption rates after training sessions remain low at approximately 1-2%. This project builds interpretable machine learning models to predict which farmers are most likely to adopt the practices  taught after training. This enables DigiCow to prioritise follow-up support and design more effective extension strategies.
 
-## Overview
-This project predicts the probability that a smallholder farmer adopts an agricultural practice within 7, 90 and 120 days of attending a training session. The analysis was developed as part of the DigiCow Farmer Adoption Prediction challenge on Zindi Africa.
+## The Challenge
+Agricultural training programs are widely used to improve productivity among smallholder farmers. However, attending training does not necessarily translate to adoption of recommended practices. Understanding which farmers are most likely to adopt new techniques can help organizations target resources more effectively and improve program design.
 
-The focus throughout is on interpretable models whose predictions and feature importance scores can be explained to a non-technical audience.
+In this project, I developed predictive models to identify factors associated with the adoption of dairy farming practices among Kenyan farmers participating in the DigiCow training program. Rather than focusing solely on model performance, I was interested in understanding which factors consistently influenced adoption and how those insights could support more effective agricultural extension strategies.
 
-## Problem
 Adoption rates after agricultural training are very low and uneven; approximately 1-2% within any prediction window. Identifying which farmers are most likely to adopt allows DigiCow to prioritise follow-up support and design more effective training programmes.
 
 ## Data
@@ -25,6 +24,18 @@ Adoption rates after agricultural training are very low and uneven; approximatel
 | Prior.csv | 44,882 historical records used for feature engineering |
 
 ## Approach
+
+The project followed a structured machine learning workflow:
+
+- Data cleaning and validation
+- Feature engineering
+- Training-validation split to prevent information leakage
+- Logistic Regression as an interpretable baseline model
+- Decision Tree modelling to capture potential non-linear relationships
+- Classifier Chain modelling to account for dependencies between adoption outcomes
+- Model evaluation using AUC-ROC
+
+Special attention was given to class imbalance and reproducibility throughout the modelling process.
 
 ### Feature Engineering
 Six features were constructed from the available data:
@@ -56,6 +67,10 @@ Three models were built and compared:
 
 All models substantially outperform random guessing (AUC=0.5).
 
+### Limitations and Considerations
+It is worth noting that several engineered variables were derived from historical adoption behaviour. While these features improved predictive performance, they may not generalize perfectly to new trainers, counties, or training topics with limited historical data.
+
+In addition, adoption behaviour is influenced by external factors such as market conditions, weather, and resource availability, which were not captured in the dataset.
 ## Leaderboard Results
 | Model | Public AUC | Notes |
 |---|---|---|
@@ -63,10 +78,26 @@ All models substantially outperform random guessing (AUC=0.5).
 | LightGBM + feature engineering | 0.783 | Complex-83 features |
 
 ## Key Findings
-- Trainer quality is the strongest predictor; the best trainer achieves 5.31% adoption vs 0.14% for the worst
-- Health-focused topics (poultry health, deworming, vaccination) drive the highest adoption rates; up to 24% for some topics
-- USSD-registered farmers adopt at 3x the rate of manually registered farmers
-- Classifier chain improves 90-day prediction by conditioning on the 120-day estimate
+
+- Trainer performance emerged as the strongest predictor of adoption. Farmers assigned to the highest-performing trainers adopted at substantially higher rates than those assigned to lower-performing trainers, suggesting that extension delivery quality plays a critical role in behaviour change.
+
+- Health-related topics such as vaccination and deworming consistently generated higher adoption rates than other content areas, indicating that topic relevance may influence farmer engagement.
+
+- Farmers who registered through USSD channels adopted at higher rates, suggesting that digital engagement may serve as a useful proxy for motivation or programme readiness.
+
+
+## Author's Note
+
+This was actually my second attempt at the DigiCow challenge.
+
+My first submission achieved a better leaderboard score, but when I revisited the project, I wanted to understand the problem more deeply rather than simply maximise performance. I stripped the model back, engineered a small number of features from first principles, and focused on building something I could explain.
+
+What surprised me most was that trainer and topic effects consistently mattered more than I expected. I went into the project assuming adoption would be driven mainly by farmer characteristics. Instead, the models suggested that how training is delivered and what is being taught may be just as important.
+
+The project also reinforced something I keep encountering in data work: good performance does not always mean good understanding. Although this version scored lower on the leaderboard, I came away with a much clearer picture of the problem and a stronger appreciation for the trade-offs between predictive accuracy, interpretability, and practical decision-making.
+
+I intend to continue improving the model by incorporating additional features, exploring more advanced algorithms, and testing whether the findings remain consistent across different modelling approaches.
+
 
 ## Tools
 Python 3.13 · pandas · numpy · scikit-learn · matplotlib · seaborn

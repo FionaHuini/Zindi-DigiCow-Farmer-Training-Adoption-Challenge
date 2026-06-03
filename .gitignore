@@ -1,12 +1,18 @@
-# Hide competition data and old files
+# Data files
 Train.csv
 Test.csv
 Prior.csv
-first_submission.csv
-first_submission(2).csv
 SampleSubmission.csv
-submission.csv
+
+# Submission files
+*.csv
+*.xls
+*.xlsx
+
+# Old notebooks
 DigiCow_pipeline.ipynb
-*.pdf
-__pycache__/
+DigiCow_pipeline.ipynb.html
+StarterNotebook.ipynb
+
+# Jupyter checkpoints
 .ipynb_checkpoints/

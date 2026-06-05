@@ -53,7 +53,7 @@ st.markdown("""
 Predict the probability that a farmer adopts an agricultural practice
 within **7, 90 and 120 days** of attending a training session.
 
-Enter the farmer's details below to generate a prediction.
+Enter the farmer's details to generate a prediction.
 """)
 
 st.divider()
@@ -210,7 +210,7 @@ st.divider()
 
 # ── Footer ────────────────────────────────────────────────────────────────────
 st.caption("""
-Built by Fiona Huini | Biostatistics Graduate  
+Built by Fiona Huini  
 Models: Logistic Regression trained on DigiCow farmer training data  
 Data source: Zindi Africa - DigiCow Farmer Adoption Prediction Challenge
 """)
